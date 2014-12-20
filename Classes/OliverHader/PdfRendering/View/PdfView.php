@@ -29,7 +29,16 @@ class PdfView extends \TYPO3\Fluid\View\StandaloneView {
 		$this->baseRenderingContext->getTemplateVariableContainer()->add('response', $this->response);
 
 		parent::render($actionName);
-		return \ZendPdf\PdfDocument::parse($this->response->getContent());
+		$source = $this->response->getContent();
+		return \ZendPdf\PdfDocument::parse($source);
+	}
+
+	/**
+	 * @param string $filePath
+	 * @param string $actionName
+	 */
+	public function save($filePath, $actionName = NULL) {
+		$this->render($actionName)->save($filePath);
 	}
 
 }
