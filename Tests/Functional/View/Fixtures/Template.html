@@ -1,0 +1,21 @@
+{namespace pdf=OliverHader\PdfRendering\ViewHelpers}
+<pdf:document fileName="{source}" defaultFont="Helvetica" defaultFontSize="8">
+	<pdf:page pageNumber="1">
+		<pdf:element.text x="57" y="710">
+			<pdf:style.font fontSize="15">
+				<pdf:style.bold>Bold Text</pdf:style.bold>
+			</pdf:style.font>
+		</pdf:element.text>
+
+		<pdf:element.text x="60" y="679">{subject.title}</pdf:element.text>
+
+		<pdf:element.text x="57" y="440" width="540">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+			labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+			et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+			ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+			et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+			rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+		</pdf:element.text>
+	</pdf:page>
+</pdf:document>
