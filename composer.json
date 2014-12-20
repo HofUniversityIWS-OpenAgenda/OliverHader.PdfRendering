@@ -1,0 +1,7 @@
+{
+	"name": "oliverhader/pdfrendering",
+	"type": "typo3-flow-package",
+	"description": "PDF rendering using TYPO3 Fluid",
+	"require": {"typo3/flow": "*"},
+	"autoload": {"psr-0": {"OliverHader\\PdfRendering": "Classes"}}
+}
