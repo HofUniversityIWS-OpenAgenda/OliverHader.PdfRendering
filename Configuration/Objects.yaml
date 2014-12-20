@@ -1,0 +1,4 @@
+OliverHader\PdfRendering\View\PdfView:
+  properties:
+    renderingContext:
+      object: TYPO3\Fluid\Core\Rendering\RenderingContext
