@@ -132,9 +132,21 @@ class TextViewHelper extends AbstractDocumentViewHelper {
 				continue;
 			}
 
+			$isLineBreak = (preg_match('#<br\s*/?>#i', $word) > 0);
 			$wordWidth = $this->calculateWordWidth($word);
 
-			if ($usedWidth + $wordWidth > $availableWidth) {
+			if ($isLineBreak) {
+				$page->drawText($line, $currentX, $currentY);
+				$line = '';
+
+				$usedWidth = 0;
+				$currentX = $textStreamContext->getX();
+				$currentY -= $this->getLineHeight();
+				$availableWidth = $width - $currentX;
+				continue;
+			}
+
+			if ($usedWidth + $wordWidth > $availableWidth || $isLineBreak) {
 				if ($line !== '') {
 					$page->drawText($line, $currentX, $currentY);
 					$line = '';

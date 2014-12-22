@@ -168,7 +168,11 @@
     function utf8_ord( $chr )
     {
         $chr    = utf8_split( $chr );
-        
+
+		if (count($chr) === 0) {
+			return 0;
+		}
+
         $chr    = $chr[0];
         
         switch( strlen( $chr ) )
