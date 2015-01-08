@@ -10,7 +10,7 @@ use TYPO3\Flow\Annotations as Flow;
 /**
  * Class TextStreamContext
  *
- * Handles positions and instructions inside a <pdf:element.text> block.
+ * Handles positions and instructions inside a `<pdf:element.text>` block.
  * This context is bound inside the accordant TextViewHelper.
  *
  * @author Oliver Hader <oliver.hader@typo3.org>
