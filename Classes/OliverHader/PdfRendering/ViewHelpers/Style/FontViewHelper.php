@@ -9,15 +9,20 @@ use TYPO3\Flow\Annotations as Flow;
 use OliverHader\PdfRendering\ViewHelpers\AbstractDocumentViewHelper;
 
 /**
- * Class TotalViewHelper
+ * Class FontViewHelper.
+ *
+ * Creates instruction for a different font and font size.
+ *
  * @author Oliver Hader <oliver.hader@typo3.org>
  */
 class FontViewHelper extends AbstractDocumentViewHelper {
 
 	/**
-	 * @param string $fontName
-	 * @param int $fontSize
-	 * @return string
+	 * Renders (= creates instruction) for a different font and font size.
+	 *
+	 * @param string $fontName The name of the font
+	 * @param float $fontSize THe font size
+	 * @return string The wrapped instruction identifier
 	 */
 	public function render($fontName = NULL, $fontSize = NULL) {
 		if (!$this->hasPage()) {

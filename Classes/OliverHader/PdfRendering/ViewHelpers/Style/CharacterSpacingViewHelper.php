@@ -9,14 +9,19 @@ use TYPO3\Flow\Annotations as Flow;
 use OliverHader\PdfRendering\ViewHelpers\AbstractDocumentViewHelper;
 
 /**
- * Class TotalViewHelper
+ * Class CharacterSpacingViewHelper.
+ *
+ * Creates instruction for a modified character spacing.
+ *
  * @author Oliver Hader <oliver.hader@typo3.org>
  */
 class CharacterSpacingViewHelper extends AbstractDocumentViewHelper {
 
 	/**
-	 * @param float $value
-	 * @return string
+	 * Renders (= creates instruction) for an element using modified character spacing.
+	 *
+	 * @param float $value The character spacing value
+	 * @return string The wrapped instruction identifier
 	 */
 	public function render($value) {
 		if (!$this->hasPage()) {

@@ -9,16 +9,21 @@ use TYPO3\Flow\Annotations as Flow;
 use OliverHader\PdfRendering\ViewHelpers\AbstractDocumentViewHelper;
 
 /**
- * Class TotalViewHelper
+ * Class RgbViewHelper.
+ *
+ * Creates instruction for a RGB color element.
+ *
  * @author Oliver Hader <oliver.hader@typo3.org>
  */
 class RgbViewHelper extends AbstractDocumentViewHelper {
 
 	/**
-	 * @param float $r
-	 * @param float $g
-	 * @param float $b
-	 * @return string
+	 * Renders (= creates instruction) for a RGB color element.
+	 *
+	 * @param float $r The red value
+	 * @param float $g The green value
+	 * @param float $b The blue value
+	 * @return string The wrapped instruction identifier
 	 */
 	public function render($r, $g, $b) {
 		if (!$this->hasPage()) {

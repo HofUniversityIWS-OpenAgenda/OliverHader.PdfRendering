@@ -14,12 +14,13 @@ use TYPO3\Flow\Annotations as Flow;
 class PageViewHelper extends AbstractDocumentViewHelper {
 
 	/**
-	 * @param int $pageNumber
+	 * Renders a PDF page.
+	 * Results are directly applied to the known PDF document.
+	 *
+	 * @param int $pageNumber Page index number to be rendered in the target PDF document (staring with 1)
 	 * @return void
 	 */
 	public function render($pageNumber) {
-		$pageIndex = $pageNumber - 1;
-
 		if (!$this->hasDocument()) {
 			return;
 		}
@@ -37,6 +38,11 @@ class PageViewHelper extends AbstractDocumentViewHelper {
 		$this->unsetPage();
 	}
 
+	/**
+	 * Applies default values to the PDF page to be rendered.
+	 *
+	 * @param \ZendPdf\Page $page
+	 */
 	protected function applyDefaults(\ZendPdf\Page $page) {
 		$defaultFont = $this->getVariable('defaultFont');
 		$defaultFontSize = $this->getVariable('defaultFontSize');

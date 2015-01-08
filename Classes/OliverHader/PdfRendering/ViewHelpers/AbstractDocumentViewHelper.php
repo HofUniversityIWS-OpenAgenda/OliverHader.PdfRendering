@@ -20,12 +20,20 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	 */
 	protected $escapingInterceptorEnabled = TRUE;
 
+	/**
+	 * Determines whether a variable is available.
+	 *
+	 * @param string $variableName The variable identifier
+	 * @return bool
+	 */
 	protected function hasVariable($variableName) {
 		return $this->viewHelperVariableContainer->exists(self::NAME_ViewHelper, $variableName);
 	}
 
 	/**
-	 * @param string $variableName
+	 * Gets the value of a variable if available, NULL otherwise.
+	 *
+	 * @param string $variableName The variable identifier
 	 * @return NULL|mixed
 	 */
 	protected function getVariable($variableName) {
@@ -37,9 +45,12 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
-	 * @param string $variableName
-	 * @param mixed $value
-	 * @param bool $override
+	 * Sets the value for a variable.
+	 * If the variable has been set already, it's ignored unless the $override argument is TRUE.
+	 *
+	 * @param string $variableName The variable identifier
+	 * @param mixed $value The value of for this variable
+	 * @param bool $override Whether to override existing variables
 	 */
 	protected function setVariable($variableName, $value, $override = FALSE) {
 		if ($override || !$this->hasVariable($variableName)) {
@@ -48,7 +59,9 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
-	 * @param $variableName
+	 * Removes a variable.
+	 *
+	 * @param string $variableName The variable identifier
 	 */
 	protected function unsetVariable($variableName) {
 		if (!$this->hasVariable($variableName)) {
@@ -57,6 +70,8 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Determines whether the PDF document is known.
+	 *
 	 * @return bool
 	 */
 	protected function hasDocument() {
@@ -64,6 +79,8 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Gets the current PDF document.
+	 *
 	 * @return NULL|\ZendPdf\PdfDocument
 	 */
 	protected function getDocument() {
@@ -71,17 +88,24 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Sets the current PDF document.
+	 *
 	 * @param \ZendPdf\PdfDocument $document
 	 */
 	protected function setDocument(\ZendPdf\PdfDocument $document) {
 		$this->setVariable('document', $document);
 	}
 
+	/**
+	 * Forgets about the current PDF document.
+	 */
 	protected function unsetDocument() {
 		$this->unsetVariable('document');
 	}
 
 	/**
+	 * Determines whether the current PDF page is known.
+	 *
 	 * @return bool
 	 */
 	protected function hasPage() {
@@ -89,6 +113,8 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Gets the current PDF page.
+	 *
 	 * @return NULL|\ZendPdf\Page
 	 */
 	protected function getPage() {
@@ -96,17 +122,24 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Sets the current PDF page.
+	 *
 	 * @param \ZendPdf\Page $page
 	 */
 	protected function setPage(\ZendPdf\Page $page) {
 		$this->setVariable('page', $page);
 	}
 
+	/**
+	 * Forgets about the current PDF page.
+	 */
 	protected function unsetPage() {
 		$this->unsetVariable('page');
 	}
 
 	/**
+	 * Determines whether a text stream context is known.
+	 *
 	 * @return bool
 	 */
 	protected function hasTextStreamContext() {
@@ -114,6 +147,8 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Gets the current text stream context.
+	 *
 	 * @return NULL|\OliverHader\PdfRendering\Context\TextStreamContext
 	 */
 	protected function getTextStreamContext() {
@@ -125,6 +160,8 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Processes special characters that are given as HTML entities.
+	 *
 	 * @param string $content
 	 * @return string
 	 */
@@ -133,6 +170,8 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
+	 * Renders child elements.
+	 *
 	 * @return NULL|string
 	 */
 	public function renderChildren() {
@@ -146,7 +185,9 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
-	 * @param string $identifier
+	 * Creates a new instruction.
+	 *
+	 * @param string $identifier The identifier of the instruction
 	 * @return \OliverHader\PdfRendering\Context\TextStreamInstruction
 	 */
 	protected function createInstruction($identifier) {
@@ -156,15 +197,19 @@ class AbstractDocumentViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractVi
 	}
 
 	/**
-	 * @param string $content
-	 * @param string $identifier
-	 * @return string
+	 * Wraps a content block with instruction identifier marks.
+	 *
+	 * @param string $content The content to be wrapped
+	 * @param string $identifier The instruction identifier
+	 * @return string The wrapped content block
 	 */
 	protected function wrap($content, $identifier) {
 		return '{' . $identifier . '}' . $content . '{' . $identifier . '}';
 	}
 
 	/**
+	 * Gets the name of a PDF font.
+	 *
 	 * @param \ZendPdf\Resource\Font\AbstractFont $font
 	 * @return string
 	 */

@@ -14,11 +14,13 @@ use TYPO3\Flow\Annotations as Flow;
 class DocumentViewHelper extends AbstractDocumentViewHelper {
 
 	/**
-	 * @param string $fileName
-	 * @param string $defaultFont
-	 * @param string $defaultFontSize
-	 * @param array $defaultColor
-	 * @param float $defaultCharacterSpacing
+	 * Renders a PDF document
+	 *
+	 * @param string $fileName The file name of the source PDF document template
+	 * @param string $defaultFont The name of the default PDF font
+	 * @param float $defaultFontSize The size of the default PDF font
+	 * @param array $defaultColor The default RGB color values
+	 * @param float $defaultCharacterSpacing The default additional character spacing
 	 */
 	public function render($fileName, $defaultFont = NULL, $defaultFontSize = NULL, array $defaultColor = NULL, $defaultCharacterSpacing = 0.0) {
 		if (!file_exists($fileName)) {
@@ -42,6 +44,8 @@ class DocumentViewHelper extends AbstractDocumentViewHelper {
 	}
 
 	/**
+	 * Gets the response object using in the view.
+	 *
 	 * @return NULL|\TYPO3\Flow\Mvc\Response
 	 */
 	protected function getResponse() {
@@ -52,6 +56,12 @@ class DocumentViewHelper extends AbstractDocumentViewHelper {
 		return $response;
 	}
 
+	/**
+	 * Initializes the default PDF font.
+	 * If none is provided Helvetica will be used.
+	 *
+	 * @param NULL|string $defaultFont The name of the default PDF font
+	 */
 	protected function initializeDefaultFont($defaultFont = NULL) {
 		if ($defaultFont === NULL) {
 			$defaultFont = \ZendPdf\Font::FONT_HELVETICA;
@@ -62,6 +72,12 @@ class DocumentViewHelper extends AbstractDocumentViewHelper {
 		$this->setVariable('currentFont', $font, TRUE);
 	}
 
+	/**
+	 * Initializes the default PDF font size.
+	 * If none is given the size of 10 will be used.
+	 *
+	 * @param NULL|float $defaultFontSize The default PDF font size
+	 */
 	protected function initializeDefaultFontSize($defaultFontSize = NULL) {
 		if ($defaultFontSize === NULL) {
 			$defaultFontSize = 10;
@@ -71,6 +87,12 @@ class DocumentViewHelper extends AbstractDocumentViewHelper {
 		$this->setVariable('currentFontSize', $defaultFontSize, TRUE);
 	}
 
+	/**
+	 * Initializes the default RGB color.
+	 * If none is given black (RGB 0,0,0) will be used.
+	 *
+	 * @param array $defaultColor The default RGB color values
+	 */
 	protected function initializeDefaultColor(array $defaultColor = NULL) {
 		if ($defaultColor === NULL) {
 			$defaultColor = array(
@@ -91,13 +113,18 @@ class DocumentViewHelper extends AbstractDocumentViewHelper {
 	}
 
 	/**
-	 * @param float $defaultCharacterSpacing
+	 * Initializes default PDF styles.
+	 *
+	 * @param float $defaultCharacterSpacing The default additional character spacing
 	 */
 	protected function initializeDefaultStyle($defaultCharacterSpacing = 0.0) {
 		$this->setVariable('defaultCharacterSpacing', $defaultCharacterSpacing);
 		$this->setVariable('currentCharacterSpacing', $defaultCharacterSpacing);
 	}
 
+	/**
+	 * Forgets about the initialized default values.
+	 */
 	protected function unsetDefaults() {
 		$this->unsetVariable('defaultFont');
 		$this->unsetVariable('currentFont');

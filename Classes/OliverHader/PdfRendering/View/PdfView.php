@@ -20,6 +20,8 @@ class PdfView extends \TYPO3\Fluid\View\StandaloneView {
 	protected $response;
 
 	/**
+	 * Renders the PDF document.
+	 *
 	 * @param string $actionName
 	 * @return \ZendPdf\PdfDocument
 	 */
@@ -34,6 +36,8 @@ class PdfView extends \TYPO3\Fluid\View\StandaloneView {
 	}
 
 	/**
+	 * Renders and saves the PDF document to a file.
+	 *
 	 * @param string $filePath
 	 * @param string $actionName
 	 */

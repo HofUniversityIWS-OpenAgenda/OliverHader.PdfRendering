@@ -9,13 +9,18 @@ use TYPO3\Flow\Annotations as Flow;
 use OliverHader\PdfRendering\ViewHelpers\AbstractDocumentViewHelper;
 
 /**
- * Class TotalViewHelper
+ * Class BoldViewHelper.
+ *
+ * Creates instruction for a bold element.
+ *
  * @author Oliver Hader <oliver.hader@typo3.org>
  */
 class BoldViewHelper extends AbstractDocumentViewHelper {
 
 	/**
-	 * @return string
+	 * Renders (= creates instruction) for a bold element.
+	 *
+	 * @return string The wrapped instruction identifier
 	 */
 	public function render() {
 		if (!$this->hasPage()) {

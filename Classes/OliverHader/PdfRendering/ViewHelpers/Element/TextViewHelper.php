@@ -10,15 +10,23 @@ use OliverHader\PdfRendering\Context\TextStreamInstruction;
 use OliverHader\PdfRendering\ViewHelpers\AbstractDocumentViewHelper;
 
 /**
- * Class TotalViewHelper
+ * Class TextViewHelper.
+ *
+ * Usage:
+ * + <pdf:element.text x="57" y="440">Singe line</pdf:element.text>
+ * + <pdf:element.text x="57" y="440" width="540">Multi line content, with automatic line breaks</pdf:element.text>
+ * + <pdf:element.text x="57" y="440">Singe line with <pdf:style.bold>bold</pdf:style.bold> parts</pdf:element.text>
+ *
  * @author Oliver Hader <oliver.hader@typo3.org>
  */
 class TextViewHelper extends AbstractDocumentViewHelper {
 
 	/**
-	 * @param int $x
-	 * @param int $y
-	 * @param int $width
+	 * Renders a text element.
+	 *
+	 * @param float $x
+	 * @param float $y
+	 * @param float $width
 	 * @return void
 	 */
 	public function render($x, $y, $width = NULL) {
@@ -40,6 +48,11 @@ class TextViewHelper extends AbstractDocumentViewHelper {
 		$this->templateVariableContainer->remove('textStreamContext');
 	}
 
+	/**
+	 * Renders child elements.
+	 *
+	 * @return string
+	 */
 	protected function processChildren() {
 		$content = trim($this->renderChildren());
 		$content = preg_replace('#[\s]+#', ' ', $content);
@@ -76,6 +89,8 @@ class TextViewHelper extends AbstractDocumentViewHelper {
 	}
 
 	/**
+	 * Processes found instructions during rendering process.
+	 *
 	 * @param TextStreamInstruction $instruction
 	 * @return TextStreamInstruction
 	 */
@@ -108,6 +123,8 @@ class TextViewHelper extends AbstractDocumentViewHelper {
 	}
 
 	/**
+	 * Renders the actual content.
+	 *
 	 * @param string $content
 	 */
 	protected function renderContent($content) {
@@ -173,6 +190,8 @@ class TextViewHelper extends AbstractDocumentViewHelper {
 	}
 
 	/**
+	 * Gets the current line height, depending on the current font being used.
+	 *
 	 * @return float
 	 */
 	protected function getLineHeight() {
@@ -183,6 +202,8 @@ class TextViewHelper extends AbstractDocumentViewHelper {
 	}
 
 	/**
+	 * Calculates the width for a word/text, depending on the current font being used.
+	 *
 	 * @param string $text
 	 * @return float|int
 	 */
